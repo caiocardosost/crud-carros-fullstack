@@ -1,0 +1,12 @@
+POST http://localhost:8081/api/carro/novo
+PUT http://localhost:8081/api/carro/editar/{id}
+GET http://localhost:8081/api/carro/busca/{id}
+GET ALL http://localhost:8081/api/carro/buscatodos
+DELETE http://localhost:8081/api/carro/apagar/{id}
+GET ANO hhttp://localhost:8081/api/carro/buscaano?ano=2008
+
+Exemplo de instancia Postman:
+ {
+    "modelo": "Civic",
+    "ano": 2022
+}
