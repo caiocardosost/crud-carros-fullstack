@@ -24,10 +24,14 @@ public class CarroService {
 	}
 	
 	public String edit(Carro carro, long id) {
-		carro.setId(id);
-		this.carroRepo.save(carro);
-		return "Carro atualizado com sucesso!";		
+		if (this.findById(id) != null){
+			carro.setId(id);
+			this.carroRepo.save(carro);
+			return "Carro atualizado com sucesso!";	
+		}
+		return "Id invalido";
 	}
+	
 	
 	public String deleteById(long id) {
 		this.carroRepo.deleteById(id);
@@ -35,7 +39,8 @@ public class CarroService {
 	}
 	
 	public Carro findById(long id) {
-		return this.carroRepo.findById(id).get();
+		Carro carro = this.carroRepo.findById(id).get();
+		return carro;
 	}
 	
 	public List<Carro> findAll(){
