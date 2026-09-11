@@ -1,0 +1,29 @@
+<div class="Container">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div class="card topo">
+                <div class="card-body">
+                    <h5 class="card-title centralizar">Novo Registro</h5>
+                    <br>
+                    <p class="card-text">
+                    <mdb-form-control>
+                        <input mdbInput type="text" id="nome" class="form-control" [(ngModel)]="carro.nome" />
+                        <label mdbLabel class="form-label" for="nome">Nome</label>
+                    </mdb-form-control>
+                    <br>
+                    <mdb-form-control>
+                        <input mdbInput type="text" id="ano" class="form-control" [(ngModel)] = "carro.ano" />
+                        <label mdbLabel class="form-label" for="ano">Ano</label>
+                    </mdb-form-control>
+                    
+                    <div class="centralizar">
+                        <button type="button" class="btn btn-primary" (click)="save()">salvar</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>

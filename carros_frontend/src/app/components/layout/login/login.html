@@ -1,0 +1,29 @@
+<div class="Container">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div class="card topo">
+                <div class="card-body">
+                    <h5 class="card-title centralizar">Autentique-se!</h5>
+                    <br>
+                    <p class="card-text">
+                    <mdb-form-control>
+                        <input mdbInput type="text" id="usuario" class="form-control" [(ngModel)]="usuario"] />
+                        <label mdbLabel class="form-label" for="usuario">Usuario</label>
+                    </mdb-form-control>
+                    <br>
+                    <mdb-form-control>
+                        <input mdbInput type="password" id="senha" class="form-control" [(ngModel)] = "senha" />
+                        <label mdbLabel class="form-label" for="senha">Senha</label>
+                    </mdb-form-control>
+                    
+                    <div class="centralizar">
+                        <button type="button" class="btn btn-primary" (click)="logar()">Logar</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>
