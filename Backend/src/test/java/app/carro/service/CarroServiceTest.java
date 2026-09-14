@@ -34,8 +34,11 @@ public class CarroServiceTest {
 	void cenario01() {
 		Carro carro = new Carro();
 		carro.setId(30);
-		carro.setNome("Saveiro");
-		carro.setAno(2020);
+		carro.setModelo("Saveiro");
+		carro.setMarca("Volkswagen");
+		carro.setCor("Branca");
+		carro.setAno(2022);
+		carro.setPreco(85000.00);
 	    when(this.carroRepo.save(carro)).thenReturn(carro);
 		String resposta = this.carroServ.save(carro);
 		String esperado = "Carro Salvo com Sucesso!";
@@ -49,8 +52,11 @@ public class CarroServiceTest {
 		List<Carro> lista = new ArrayList<>();
 		Carro carro = new Carro();
 		carro.setId(30);
-		carro.setNome("Saveiro");
-		carro.setAno(2020);
+		carro.setModelo("Saveiro");
+		carro.setMarca("Volkswagen");
+		carro.setCor("Branca");
+		carro.setAno(2022);
+		carro.setPreco(85000.00);
 		lista.add(carro);
 	    when(this.carroRepo.findAll()).thenReturn(lista);
 		List<Carro> resposta = this.carroServ.findAll();
@@ -64,12 +70,19 @@ public class CarroServiceTest {
 	void cenario03() {
 		Carro carro = new Carro();
 		carro.setId(30);
-		carro.setNome("Saveiro");
-		carro.setAno(2020);
+		carro.setModelo("Saveiro");
+		carro.setMarca("Volkswagen");
+		carro.setCor("Branca");
+		carro.setAno(2022);
+		carro.setPreco(85000.00);
 		Carro carro2 = new Carro();
-		carro2.setId(30);
-		carro2.setNome("Ecosport");
-		carro2.setAno(2025);
+		carro2.setId(32);
+		carro.setId(30);
+		carro.setModelo("Ecosport");
+		carro.setMarca("Ford");
+		carro.setCor("Prata");
+		carro.setAno(2021);
+		carro.setPreco(78000.00);
 	    when(this.carroRepo.findById(30L)).thenReturn(Optional.of(carro));
 	    when(this.carroRepo.save(carro)).thenReturn(carro2);
 

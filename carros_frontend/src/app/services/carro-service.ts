@@ -14,13 +14,16 @@ export class CarroService {
     constructor(){}
 
     findAll():Observable<Carro[]>{
-        return this.http.get<Carro[]>(this.API+"/buscatodos");
+        return this.http.get<Carro[]>(this.API+"/carroslist");
     }
 
     save(carro: Carro): Observable<string>{
         return this.http.post<string>(this.API+"/novo", carro, {responseType: 'text' as 'json'});
     }
-    update(carro:Carro, index: number){
-        //todo
+    update(carro:Carro, index: number): Observable<string>{
+        return this.http.put<string>(this.API+"/editar/"+index, carro, {responseType: 'text' as 'json'});
+    }
+    delete(index: number): Observable<string>{
+        return this.http.delete<string>(this.API+"/apagar/"+index, {responseType: 'text' as 'json'});
     }
 }

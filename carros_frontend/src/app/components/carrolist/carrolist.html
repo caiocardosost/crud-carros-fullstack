@@ -11,8 +11,11 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nome</th>
+                            <th>Modelo</th>
+                            <th>Marca</th>
+                            <th>Cor</th>
                             <th>Ano</th>
+                            <th>Preco</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -20,12 +23,15 @@
                         @for (carro of lista(); track $index) {
                         <tr>
                             <td>{{carro.id}}</td>
-                            <td>{{carro.nome}}</td>
+                            <td>{{carro.modelo}}</td>
+                            <td>{{carro.marca}}</td>
+                            <td>{{carro.cor}}</td>
                             <td>{{carro.ano}}</td>
+                            <td>{{carro.preco}}</td>
                             <td>
                                 <div class="direita">
                                     <button type="button" class="btn btn-primary" routerLink="/admin/carro/edit/{{carro.id}}">Editar</button>
-                                    <button type="button" class="btn btn-danger" (click)="deletar(carro)">Deletar</button>
+                                    <button type="button" class="btn btn-danger" (click)="deletar(carro.id)">Deletar</button>
                                 </div>
                             </td>
                         </tr>

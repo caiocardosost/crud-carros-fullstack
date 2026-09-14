@@ -13,7 +13,7 @@ import { CarroService } from '../../services/carro-service';
   templateUrl: './carrodetails.html',
 })
 export class Carrodetails {
-  carro: Carro = new Carro(0,"",0);
+  carro: Carro = new Carro(0,"","","",0,0);
 
   router = inject(ActivatedRoute); // recuperar pathvariable
   router2 = inject(Router); //redirecionar
@@ -22,14 +22,22 @@ export class Carrodetails {
   save(){
     let index = this.router.snapshot.params['id'];
     if (index>0){
-      Swal.fire({
-        title: 'Carro atualizado com sucesso!',
-        icon: 'success',
-        confirmButtonText: 'Ok'
+      this.carServ.update(this.carro, index).subscribe({
+        next: mensagem =>{
+          Swal.fire({
+          title: 'Carro atualizado com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+          }),
+          this.router2.navigate(['admin/carro']);
+        },
+        error: erro =>{
+          alert("Erro ao atualizar");
+          console.error(erro);
+        }
       })
-      this.carServ.update(this.carro, index);
-    } else{
-      
+    } 
+    else{     
       this.carServ.save(this.carro).subscribe({
         next: mensagem => {
           Swal.fire({
@@ -38,7 +46,6 @@ export class Carrodetails {
           confirmButtonText: 'Ok'
           }),
           this.router2.navigate(["admin/carro"]);
-
         },
         error: erro =>{
           alert("erro ao salvar"),
@@ -46,7 +53,6 @@ export class Carrodetails {
         }
       })
     }
-    
   }
 
 

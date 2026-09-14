@@ -17,7 +17,10 @@ public class Carro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String nome;
-	private int ano;
+    private String marca;
+    private String modelo;
+    private Integer ano;
+    private String cor;
+    private Double preco;
 
 }

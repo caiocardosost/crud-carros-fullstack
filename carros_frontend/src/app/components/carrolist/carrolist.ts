@@ -3,6 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CarroService } from '../../services/carro-service';
 import { Carro } from '../../models/carro';
+import Swal from 'sweetalert2';
 
 @Component({
   imports: [RouterLink],
@@ -13,22 +14,9 @@ import { Carro } from '../../models/carro';
 export class Carrolist {
   lista = signal<Carro[]>([]);
   carServ = inject(CarroService);
-
+  
   constructor(){
     this.findAll();
-    let carroNovo = history.state.carroNovo;
-    let carroEditado = history.state.carroEditado;
-
-    if(carroNovo!= null){
-      carroNovo.id = 55;
-      this.lista().push(carroNovo);
-    }
-
-    if(carroEditado != null){
-      let index = carroEditado.id;
-      this.lista()[index] = carroEditado;
-    }
-
   }
 
   findAll(){
@@ -44,7 +32,21 @@ export class Carrolist {
     })
   }
 
-  deletar(carro:Carro){
+  deletar(index:number){
+    this.carServ.delete(index).subscribe({
+      next: mensagem =>{
+        Swal.fire({
+          title: mensagem,
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }),
+        this.findAll();
+      },
+      error: erro => {
+        alert("Erro ao deletar");
+        console.error(erro);
+      }
+    })
 
   }
 }

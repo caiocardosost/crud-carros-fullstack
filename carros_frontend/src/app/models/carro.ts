@@ -1,11 +1,17 @@
 export class Carro {
     id!: number;
-    nome!: string;
+    marca!: string;
+    modelo!: string;
+    cor!: string;
     ano!: number;
+    preco!: number;
 
-    constructor(id: number, nome: string, ano: number){
+    constructor(id: number, marca: string, modelo: string, cor: string, ano: number, preco: number){
         this.id = id;
-        this.nome = nome;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.cor = cor;
         this.ano = ano;
+        this.preco = preco;
     }
 }

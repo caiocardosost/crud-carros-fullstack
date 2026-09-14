@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import app.carro.service.CarroService;
 
 @RestController
 @RequestMapping("/api/carro")
+@CrossOrigin("*")
 public class CarroController {
 	
 	//-----------INJEÇÃO DE DEPENDENCIA---------
@@ -80,7 +82,7 @@ public class CarroController {
 		}
 	}
 	
-	@GetMapping("/buscatodos")
+	@GetMapping("/carroslist")
 	public ResponseEntity<List<Carro>> findAll(){
 		try {
 			List<Carro> retorno = this.carService.findAll();
