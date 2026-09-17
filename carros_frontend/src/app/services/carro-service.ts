@@ -17,6 +17,10 @@ export class CarroService {
         return this.http.get<Carro[]>(this.API+"/carroslist");
     }
 
+    findById(index:number):Observable<Carro>{
+        return this.http.get<Carro>(this.API+"/busca/"+index);
+    }
+
     save(carro: Carro): Observable<string>{
         return this.http.post<string>(this.API+"/novo", carro, {responseType: 'text' as 'json'});
     }

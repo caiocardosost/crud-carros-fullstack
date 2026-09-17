@@ -4,9 +4,10 @@
         <div class="col-lg-8">
             <div class="card">
             <div class="card-body">
-                <h5 class="card-title centralizar">Lista de Carros</h5>
-                    <button type="button" class="btn btn-primary direita" routerLink="/admin/carro/new">Novo</button>
-                
+                <h2 class="card-title centralizar">Lista de Carros</h2>
+                    <div class="direita">
+                    <button type="button" class="btn btn-primary" routerLink="/admin/carro/new">Novo</button>
+                    </div>
                     <table class="table table-striped">
                     <thead>
                         <tr>
@@ -15,8 +16,8 @@
                             <th>Marca</th>
                             <th>Cor</th>
                             <th>Ano</th>
-                            <th>Preco</th>
-                            <th>Ações</th>
+                            <th>Preço</th>
+                            <th class="centralizar">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,9 +28,9 @@
                             <td>{{carro.marca}}</td>
                             <td>{{carro.cor}}</td>
                             <td>{{carro.ano}}</td>
-                            <td>{{carro.preco}}</td>
+                            <td>{{carro.preco | number:'1.2-2'}}</td>
                             <td>
-                                <div class="direita">
+                                <div class="centralizar">
                                     <button type="button" class="btn btn-primary" routerLink="/admin/carro/edit/{{carro.id}}">Editar</button>
                                     <button type="button" class="btn btn-danger" (click)="deletar(carro.id)">Deletar</button>
                                 </div>

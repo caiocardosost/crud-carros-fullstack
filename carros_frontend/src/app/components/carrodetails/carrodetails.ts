@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -13,16 +13,23 @@ import { CarroService } from '../../services/carro-service';
   templateUrl: './carrodetails.html',
 })
 export class Carrodetails {
-  carro: Carro = new Carro(0,"","","",0,0);
+  carro = signal<Carro>(new Carro(0,"","","",0,0));
 
   router = inject(ActivatedRoute); // recuperar pathvariable
   router2 = inject(Router); //redirecionar
   carServ = inject(CarroService);
 
+  constructor(){
+    let index = this.router.snapshot.params['id'];
+      if (index>0){
+        this.findById(index);
+      }
+  }
+
   save(){
     let index = this.router.snapshot.params['id'];
     if (index>0){
-      this.carServ.update(this.carro, index).subscribe({
+      this.carServ.update(this.carro(), index).subscribe({
         next: mensagem =>{
           Swal.fire({
           title: 'Carro atualizado com sucesso!',
@@ -38,7 +45,7 @@ export class Carrodetails {
       })
     } 
     else{     
-      this.carServ.save(this.carro).subscribe({
+      this.carServ.save(this.carro()).subscribe({
         next: mensagem => {
           Swal.fire({
           title: mensagem,
@@ -55,8 +62,17 @@ export class Carrodetails {
     }
   }
 
-
-  
-
-  
+  findById(index:number){
+    this.carServ.findById(index).subscribe({
+      next: carro => {
+        console.log('RESPOSTA DA API:', carro);
+        this.carro.set(carro);
+      },
+      error: erro =>{
+        alert("Id invalido!");
+          console.error(erro);
+      } 
+    })
+  }
+ 
 }
