@@ -13,8 +13,16 @@
                     </mdb-form-control>
                     <br>
                     <mdb-form-control>
-                        <input mdbInput type="text" id="nome" class="form-control" [(ngModel)]="carro().marca" />
-                        <label mdbLabel class="form-label" for="nome">Marca</label>
+                        <select mdbInput class="form-control" [(ngModel)]="carro().marca">
+                            <option [ngValue]="null">Selecione uma marca</option>
+
+                            @for (marca of marcas(); track marca.id) {
+                                <option [ngValue]="marca">
+                                    {{ marca.nome }}
+                                </option>
+                            }
+                        </select>
+                        <label mdbLabel class="form-label">Marca</label>
                     </mdb-form-control>
                     <br>
                     <mdb-form-control>

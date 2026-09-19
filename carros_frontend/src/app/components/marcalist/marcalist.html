@@ -1,0 +1,39 @@
+<div class="Container dist">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="card">
+            <div class="card-body">
+                <h2 class="card-title centralizar">Lista de Marcas</h2>
+                    <div class="direita">
+                    <button type="button" class="btn btn-primary" routerLink="/admin/marca/new">Nova</button>
+                    </div>
+                    <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th class="centralizar">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (marca of lista(); track $index) {
+                        <tr>
+                            <td>{{marca.id}}</td>
+                            <td>{{marca.nome}}</td>
+                            <td>
+                                <div class="centralizar">
+                                    <button type="button" class="btn btn-primary" routerLink="/admin/marca/edit/{{marca.id}}">Editar</button>
+                                    <button type="button" class="btn btn-danger" (click)="deletar(marca.id)">Deletar</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

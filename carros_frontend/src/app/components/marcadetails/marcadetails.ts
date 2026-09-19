@@ -1,26 +1,22 @@
 import { Component, inject, signal } from '@angular/core';
+import { Marca } from '../../models/marca';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { FormsModule } from '@angular/forms';
-import Swal from 'sweetalert2';
-import { Carro } from '../../models/carro';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CarroService } from '../../services/carro-service';
-import { Marca } from '../../models/marca';
 import { MarcaService } from '../../services/marca-service';
+import Swal from 'sweetalert2';
 
 @Component({
   imports: [MdbFormsModule, FormsModule],
-  selector: 'app-carrodetails',
-  styleUrl: './carrodetails.scss',
-  templateUrl: './carrodetails.html',
+  selector: 'app-marcadetails',
+  styleUrl: './marcadetails.scss',
+  templateUrl: './marcadetails.html',
 })
-export class Carrodetails {
-  marcas = signal<Marca[]>([]);
-  carro = signal<Carro>(new Carro(0,new Marca(0,""),"","",0,0));
+export class Marcadetails {
+  marca = signal<Marca>(new Marca(0,""));
 
   router = inject(ActivatedRoute); // recuperar pathvariable
   router2 = inject(Router); //redirecionar
-  carServ = inject(CarroService);
   marcaServ = inject(MarcaService);
 
   constructor(){
@@ -28,20 +24,19 @@ export class Carrodetails {
       if (index>0){
         this.findById(index);
       }
-    this.buscaMarcas();
   }
 
   save(){
     let index = this.router.snapshot.params['id'];
     if (index>0){
-      this.carServ.update(this.carro(), index).subscribe({
+      this.marcaServ.update(this.marca(), index).subscribe({
         next: mensagem =>{
           Swal.fire({
-          title: 'Carro atualizado com sucesso!',
+          title: 'Marca atualizada com sucesso!',
           icon: 'success',
           confirmButtonText: 'Ok'
           }),
-          this.router2.navigate(['admin/carro']);
+          this.router2.navigate(['admin/marca']);
         },
         error: erro =>{
           alert("Erro ao atualizar");
@@ -50,14 +45,14 @@ export class Carrodetails {
       })
     } 
     else{     
-      this.carServ.save(this.carro()).subscribe({
+      this.marcaServ.save(this.marca()).subscribe({
         next: mensagem => {
           Swal.fire({
           title: mensagem,
           icon: 'success',
           confirmButtonText: 'Ok'
           }),
-          this.router2.navigate(["admin/carro"]);
+          this.router2.navigate(["admin/marca"]);
         },
         error: erro =>{
           alert("erro ao salvar"),
@@ -68,10 +63,10 @@ export class Carrodetails {
   }
 
   findById(index:number){
-    this.carServ.findById(index).subscribe({
-      next: carro => {
-        console.log('RESPOSTA DA API:', carro);
-        this.carro.set(carro);
+    this.marcaServ.findById(index).subscribe({
+      next: marca => {
+        console.log('RESPOSTA DA API:', marca);
+        this.marca.set(marca);
       },
       error: erro =>{
         alert("Id invalido!");
@@ -79,17 +74,4 @@ export class Carrodetails {
       } 
     })
   }
-
-  buscaMarcas(){
-    this.marcaServ.findAll().subscribe({
-      next: marcas => {
-        console.log('RESPOSTA DA API:', marcas);
-        this.marcas.set(marcas);
-      },
-      error: erro =>{
-        alert("Id invalido!");
-          console.error(erro);
-      } 
-    })
-  } 
 }
