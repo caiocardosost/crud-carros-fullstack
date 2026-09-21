@@ -1,3 +1,4 @@
+import { Acessorio } from "./acessorio";
 import { Marca } from "./marca";
 
 export class Carro {
@@ -7,6 +8,7 @@ export class Carro {
     cor!: string;
     ano!: number;
     preco!: number;
+    acessorio: Acessorio[] = [];
 
     constructor(id: number, marca: Marca, modelo: string, cor: string, ano: number, preco: number){
         this.id = id;
