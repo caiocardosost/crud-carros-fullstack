@@ -5,6 +5,7 @@ import { CarroService } from '../../services/carro-service';
 import { Carro } from '../../models/carro';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { LoginService } from '../../auth/login-service';
 
 @Component({
   imports: [RouterLink, CommonModule],
@@ -15,6 +16,10 @@ import { CommonModule } from '@angular/common';
 export class Carrolist {
   lista = signal<Carro[]>([]);
   carServ = inject(CarroService);
+  
+  //Injeção do loginServ para gerenciar autorizações
+
+  loginServ = inject(LoginService);
   
   constructor(){
     this.findAll();

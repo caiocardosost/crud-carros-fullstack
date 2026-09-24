@@ -5,9 +5,12 @@
             <div class="card">
             <div class="card-body">
                 <h2 class="card-title centralizar">Lista de Carros</h2>
-                    <div class="direita">
-                    <button type="button" class="btn btn-primary" routerLink="/admin/carro/new">Novo</button>
-                    </div>
+                    
+                    @if(this.loginServ.hasRole('ADMIN')){
+                        <div class="direita">
+                            <button type="button" class="btn btn-primary" routerLink="/admin/carro/new">Novo</button>
+                        </div>
+                    }
                     <table class="table table-striped">
                     <thead>
                         <tr>
@@ -17,7 +20,9 @@
                             <th>Cor</th>
                             <th>Ano</th>
                             <th>Preço</th>
-                            <th class="centralizar">Ações</th>
+                            @if(this.loginServ.hasRole('ADMIN')){
+                                <th class="centralizar">Ações</th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -29,12 +34,15 @@
                             <td>{{carro.cor}}</td>
                             <td>{{carro.ano}}</td>
                             <td>{{carro.preco | number:'1.2-2'}}</td>
-                            <td>
-                                <div class="centralizar">
-                                    <button type="button" class="btn btn-primary" routerLink="/admin/carro/edit/{{carro.id}}">Editar</button>
-                                    <button type="button" class="btn btn-danger" (click)="deletar(carro.id)">Deletar</button>
-                                </div>
-                            </td>
+                            
+                            @if(this.loginServ.hasRole('ADMIN')){
+                                <td>
+                                    <div class="centralizar">
+                                        <button type="button" class="btn btn-primary" routerLink="/admin/carro/edit/{{carro.id}}">Editar</button>
+                                        <button type="button" class="btn btn-danger" (click)="deletar(carro.id)">Deletar</button>
+                                    </div>
+                                </td>
+                            }
                         </tr>
                     }
                     </tbody>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,7 @@ public class CarroController {
 	}
 	
 	//------------REQUISIÇÕES RECEBIDAS---------
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/novo")
 	public ResponseEntity<String> save(@RequestBody Carro carro){
 		try {
@@ -44,7 +45,7 @@ public class CarroController {
 		}
 	}
 	
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/editar/{id}")
 	public ResponseEntity<String> edit(@RequestBody Carro carro, @PathVariable long id){
 		try {
@@ -57,6 +58,7 @@ public class CarroController {
 		}
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/apagar/{id}")
 	public ResponseEntity<String> delete(@PathVariable long id){
 		try {
@@ -81,6 +83,7 @@ public class CarroController {
 
 		}
 	}
+	
 	
 	@GetMapping("/carroslist")
 	public ResponseEntity<List<Carro>> findAll(){

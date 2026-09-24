@@ -7,11 +7,12 @@ import { Marcalist } from './components/marcalist/marcalist';
 import { Marcadetails } from './components/marcadetails/marcadetails';
 import { Acessorioslist } from './components/acessorioslist/acessorioslist';
 import { Acessoriosdetails } from './components/acessoriosdetails/acessoriosdetails';
+import { loginGuard } from './auth/login-guard';
 
 export const routes: Routes = [
     {path:"", redirectTo:"login", pathMatch:'full'},
     {path:"login", component: LoginComponent},
-    {path: "admin", component:Principal,
+    {path: "admin", component: Principal, canActivate: [loginGuard],
         children:[
             {path:"carro", component:Carrolist},
             {path:"carro/new", component:Carrodetails},
