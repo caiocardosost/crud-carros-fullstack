@@ -1,9 +1,15 @@
 package app.carro.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,10 +23,17 @@ public class Carro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-    private String marca;
     private String modelo;
     private Integer ano;
     private String cor;
     private Double preco;
+    
+    @ManyToOne
+    @JoinColumn(name = "marca_id")
+    private Marca marca;
+    
+    @ManyToMany
+    @JoinTable(name = "carro_acessorio")
+    private List<Acessorio> acessorio;
 
 }
